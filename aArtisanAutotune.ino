@@ -24,6 +24,9 @@ boolean Cscale = false;
 
 #define IO3 3
 
+const int fanPin = 12; // define pin for enabling fans with separate control board
+int fanState = HIGH;  // sets fan enable pin state to HIGH
+
 int levelOT1, levelOT2, levelIO3;  // parameters to control output levels
 float AT; // ambient temp
 float T[NC];  // final output values referenced to physical channels 0-3
@@ -320,6 +323,7 @@ void check_serial() {
 
 
 void setup() {
+  pinMode(fanPin, fanState);  // enable fan control
   analogWrite( IO3, 0 ); // set fan off on startup
   
   delay(100);
